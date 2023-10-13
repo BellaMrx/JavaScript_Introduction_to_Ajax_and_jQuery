@@ -8,6 +8,9 @@
  1. An Introduction to Ajax Programming
     - 1.1. A simple example during execution
     - 1.2. Create the `XMLHttpRequest` object
+    - 1.3. Make a request to the server
+    - 1.4. Send data
+    - 1.5. Get the status of the `XMLHttpRequest` object
 
 
 
@@ -16,8 +19,10 @@
 # 1. An Introduction to Ajax Programming
 **Ajax** (Asynchronous JavaScript and XML) is used to transfer data asynchronously between a web browser and a web server.
 
+
 #### XML (Extensible Markup Language).
 **XML** is a markup language in which data is hierarchically structured as text data. **XML** is used for exchanging data between different computer systems and especially over the Internet. The **X** in **Ajax** stands for **XML** but in practice, *JSON* is used more and more.
+
 
 
 It is a way to refresh individual parts of a web page without reloading the entire web page. This means with Ajax it is possible to create faster dynamic web pages. This reduces the amount of data transfer.
@@ -48,7 +53,7 @@ The Ajax application often consists of a combination of components:
 ## 1.1. A simple example during execution
 This example cannot be tested offline and should therefore be run on a real web server. 
 
-  [Complete Code](http) --> **Examples/Part_1/...** 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...** 
 
 index.html:
    ```
@@ -105,7 +110,7 @@ The PHP script should be located in the same directory as **index.html**.
 ## 1.2. Create the `XMLHttpRequest` object 
 This `XMLHttpRequest` object is needed to exchange data with a web server and thus refresh individual parts of a web page without having to reload the entire web page.
 
-  [Complete Code](http) --> **Examples/Part_1/...** 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...** 
 
 script.js
    ```
@@ -120,5 +125,63 @@ script.js
     }
     ...
    ```
+
+
+## 1.3. Make a request to the server
+With the created `XMLHttpRequest` object a request can be made to the server to exchange data with it. To create such a request, the `open()` method must be used to connect to the target page and `send()` is used to specify the parameters of the `XMLHttpRequest` object.
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...**
+
+script.js
+   ```
+    ...
+      xmlhttp.open("GET", "php/server-time.php", true);
+      xmlhttp.send();
+    ...
+   ```
+
+The `open()` method has the syntax:
+`open(method, url, async)`.
+
+The `method` specifies the method of the request (HTTP request method), which is usually **GET** or **POST**.
+
+The `url` specifies the path or URl to the file on the server to be requested. This can be any file.
+
+The `async` specifies whether the request should be executed asynchronously (`true`) or synchronously (`false`). Mostly an asynchronous transfer is recommended, so set the value to `true`, which is what Ajax (Asynchronous JavaScript and XML) stands for. The advantage of asynchronous data transfer is that a JavaScript does not have to wait for the server's response. With synchronous transfer a JavaScript is not executed further until the answer from the server is there.
+
+ - async = true stands for asynchronous and ensures that the script continues to run as the HTTP request is executed in the background.
+ 
+ - async = false stands for synchronous and causes the script execution to stop until the data is returned from the server.
+
+The `send()` method sends the request along with the data to the server.
+
+
+## 1.4. Send data
+If `GET` was used as a method, then the parameters can be written directly into the URL.
+
+   ```
+    ...
+      xmlhttp.open("GET", "test.php?name=bella&zip=1234", true);
+      xmlhttp.send();
+    ...
+   ```
+
+With `POST` the data can be specified in the `send()` method of the `XMLHttpRequest` object. In addition, a special HTTP header must be sent with `POST`. This is done with the `setRequestHeader()` method. The required HTTP header is `Content-Type`, and the corresponding value is `"application/x-www-form-urlencoded"`. This MIME type is used for the form data.
+
+   ```
+    ...
+      xmlhttp.open("POST", "test.php", true);
+      xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xmlhttp.send("name=bella&zip=1234");
+    ...
+   ```
+
+
+## 1.5. Get the status of the `XMLHttpRequest` object
+
+
+
+
+
 
 
