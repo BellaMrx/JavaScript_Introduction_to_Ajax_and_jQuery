@@ -11,6 +11,7 @@
     - 1.3. Make a request to the server
     - 1.4. Send data
     - 1.5. Get the status of the `XMLHttpRequest` object
+    - 1.6. Forward the response from the server
 
 
 
@@ -19,16 +20,12 @@
 # 1. An Introduction to Ajax Programming
 **Ajax** (Asynchronous JavaScript and XML) is used to transfer data asynchronously between a web browser and a web server.
 
-
-#### XML (Extensible Markup Language).
-**XML** is a markup language in which data is hierarchically structured as text data. **XML** is used for exchanging data between different computer systems and especially over the Internet. The **X** in **Ajax** stands for **XML** but in practice, *JSON* is used more and more.
-
-
-
 It is a way to refresh individual parts of a web page without reloading the entire web page. This means with Ajax it is possible to create faster dynamic web pages. This reduces the amount of data transfer.
 
 Asynchronous with Ajax means that script execution continues when an HTTP request is made, because this request to the web server is executed in the background, and the user can continue to use the page. Without Ajax, this process is synchronous, which means that script execution stops until the requested data comes back from the web server.
 
+#### XML (Extensible Markup Language).
+**XML** is a markup language in which data is hierarchically structured as text data. **XML** is used for exchanging data between different computer systems and especially over the Internet. The **X** in **Ajax** stands for **XML** but in practice, *JSON* is used more and more.
 
 #### The synchronous process flow of a classic web application
 
@@ -178,6 +175,61 @@ With `POST` the data can be specified in the `send()` method of the `XMLHttpRequ
 
 
 ## 1.5. Get the status of the `XMLHttpRequest` object
+A callback function is needed which is called when the results come back from the web server. In the callback function `onreadystatechange` is passed to the `XMLHttpRequest` property.
+
+   ```
+    xmlhttp.onreadystatechange = function() {...};
+   ```
+
+A function name can also be passed as a reference if required:
+
+   ```
+    function oneFunction() {...}
+    ...
+    xmlhttp.onreadystatechange = oneFunction;
+   ```
+
+The `onreadystatechange` event is fired whenever the state of the `XMLHttpRequest` object changes.
+
+In the callback function, the state of the `XMLHttpRequest` object is first checked with the `readyState` property. There are five different states:
+
+| Value | Status             | Description  |
+| ----- | ------------------ | ------------ |
+| 0     | `UNSENT` 			 | The function `open()` has not been called yet. |
+| 1     | `OPENED` 			 | The function `send()` has not been called yet. |
+| 2     | `HEADERS_RECEIVED` | The `send()` function has already been called, and header and status are available. |
+| 3     | `LOADING` 	     | The download is in progress, but the `responseText` is not yet complete. |
+| 4     | `DONE` 			 | The process has been fully completed. |
+
+In addition to the status of the `XMLHttpRequest` object, the status of the response to the request is significant. The classic value `404` is returned if the requested page could not be returned.
+
+List with common status codes: 
+
+| Value | Message       | Description |
+| ----- | ------------- | ------------ |
+| `200` | `OK` 			| The request was successfully processed and the result of the response was transmitted. |
+| `400` | `Bad Request` | The request message was incorrect. |
+| `403` | `Forbidden` 	| The request could not be performed because there is no authorization. |
+| `404` | `Not Found` 	| The requested resource was not found on the web server. |
+
+This is how the state of the `XMLHttpRequest` object is checked:
+   ```
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.querySelector('#refreshtime').innerHTML = xmlhttp.responseText;
+        }
+    }
+   ```
+
+`onreadystatechange` is passed to the callback function to be called when the server response is there. This function is called whenever the state of the `readyState` property has changed.
+In this example, the text in `responseText` is inserted when `readyState` is equal to `4` and the status of the response in `status` is equal to `200`. The `responseText` attribute contains the web server's response to the request as text or `null` if the request was successful.
+
+More information about the properties of the `XMLHttpRequest` object is available here: [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+
+
+
+## 1.6. Forward the response from the server 
+
 
 
 
