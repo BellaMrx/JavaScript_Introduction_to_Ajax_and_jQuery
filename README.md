@@ -26,9 +26,9 @@ Asynchronous with Ajax means that script execution continues when an HTTP reques
 
 #### The synchronous process flow of a classic web application
 
- <img src="Images/synchron.png.png" width="600">
+ <img src="Images/synchron.png" width="600">
  
 
 #### The asynchronous process flow of a web application with Ajax
 
- <img src="Images/asynchron.png.png.png" width="600">
+ <img src="Images/asynchron.png" width="600">
