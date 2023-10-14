@@ -259,8 +259,16 @@ However, the web page is not completely reloaded, but only individual informatio
 
 
 ## 1.7. A more complex Ajax example with XML and DOM
+In this example, a web page will communicate with the web server while the user is typing something into an input field using the keyboard.
 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_2) --> **Examples/Part_2/...**
 
+index.html
+   ```
+    <?php
+      echo date('l jS \of F Y h:i:s A');
+    ?> 
+   ```
 
 
 

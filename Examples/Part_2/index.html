@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Complex Ajax example</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Convert units</h1>
+    <form>
+        <fieldset>
+            <legend>Convert meters to miles and yards</legend>
+            <label>Meters:</label>
+            <input type="number" id="meter" placeholder="Value in meters" onkeyup="recalculate(this.value);"> m
+            <br><label>Miles:</label>
+            <input type="number" id="miles" placeholder="Conversion miles" readonly> mi
+            <br><label>Yards:</label>
+            <input type="number" id="yards" placeholder="Yard conversion" readonly> yds
+        </fieldset>
+    </form>
+</body>
+</html>
