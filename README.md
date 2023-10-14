@@ -51,7 +51,7 @@ The Ajax application often consists of a combination of components:
 ## 1.1. A simple example during execution
 This example cannot be tested offline and should therefore be run on a real web server. 
 
-  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...** 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_1) --> **Examples/Part_1/...** 
 
 index.html:
    ```
@@ -108,7 +108,7 @@ The PHP script should be located in the same directory as **index.html**.
 ## 1.2. Create the `XMLHttpRequest` object 
 This `XMLHttpRequest` object is needed to exchange data with a web server and thus refresh individual parts of a web page without having to reload the entire web page.
 
-  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...** 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_1) --> **Examples/Part_1/...** 
 
 script.js
    ```
@@ -128,7 +128,7 @@ script.js
 ## 1.3. Make a request to the server
 With the created `XMLHttpRequest` object a request can be made to the server to exchange data with it. To create such a request, the `open()` method must be used to connect to the target page and `send()` is used to specify the parameters of the `XMLHttpRequest` object.
 
-  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_1) --> **Examples/Part_1/...**
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_1) --> **Examples/Part_1/...**
 
 script.js
    ```
@@ -255,19 +255,96 @@ The first paragraph with the text `With Ajax the time of the server should be ou
 For this process, *Ajax* has now been used with the `XMLHttpRequest` object. The button can be used as often as you like, and always the time output will be updated.
 However, the web page is not completely reloaded, but only individual information or components of the web page are updated.
 
- <img src="images/Ajax_part-1b.png" width="400"> <img src="images/Ajax_part-1c.png" width="400">
+ <img src="Images/Ajax_part-1b.png" width="400"> <img src="Images/Ajax_part-1c.png" width="400">
 
 
 ## 1.7. A more complex Ajax example with XML and DOM
 In this example, a web page will communicate with the web server while the user is typing something into an input field using the keyboard.
 
-  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Part_2) --> **Examples/Part_2/...**
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_2) --> **Examples/Part_2/...**
 
 index.html
    ```
+    <h1>Convert units</h1>
+    <form>
+        <fieldset>
+            <legend>Convert meters to miles and yards</legend>
+            <label>Meters:</label>
+            <input type="number" id="meter" placeholder="Value in meters" onkeyup="recalculate(this.value);"> m
+            <br><label>Miles:</label>
+            <input type="number" id="miles" placeholder="Conversion miles" readonly> mi
+            <br><label>Yards:</label>
+            <input type="number" id="yards" placeholder="Yard conversion" readonly> yds
+        </fieldset>
+    </form> 
+   ```
+
+ <img src="Images/Ajax_part-2a.png" width="500">
+
+Here an input can be made in numeric input. After each keystroke (`onkeyup`) the value is sent to the web server with the event handler `recalculate()` via *Ajax*.
+
+script.js
+   ```
+    let xmlhttp = null;
+
+    function recalculate(str) {
+      if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+      }
+      if (xmlhttp == null) {
+        console.log("Error while creating an XMLHttpRequest object");
+      }
+      xmlhttp.open("GET", "calc.php?meter=" + str, true);
+      xmlhttp.onreadystatechange = parseRecalculate;
+      xmlhttp.send();
+    }
+
+    function parseRecalculate() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        let xml = xmlhttp.responseXML;
+        let miles_response = xml.querySelector('miles');
+        let yards_response = xml.querySelector('yards');
+
+        document.querySelector('#miles').value = miles_response.firstChild.nodeValue;
+        document.querySelector('#yards').value = yards_response.firstChild.nodeValue;
+      } else {
+        document.querySelector('#miles').value = 0;
+        document.querySelector('#yards').value = 0;
+      }
+    }
+   ```
+
+First, a new `XMLHttpRequest` object is created in `recalculate(str)`. Then, the entered value is transmitted asynchronously to the web server via Ajax after each keystroke. The entered value in `str` is assembled directly after the URL of the `open()` method. Here the `GET` method is used, because it is only one value.
+Here instead of an anonymous function a reference of an already existing function was assigned as callback function `onreadystatechange` with `parseRecalculate`. This function will take care of everything else once the request has been sent with `send()` and the response from the web server is there.
+
+In the PHP script, the passed value in `meter` is calculated on the web server and an XML encoded calculation is returned as response:
+
+calc.php
+   ```
     <?php
-      echo date('l jS \of F Y h:i:s A');
-    ?> 
+      header("Content-Type: text/xml");
+      $meter = $_REQUEST['meter'];
+      $miles = $meter * 0.0006213711922373339;
+      $yards = $meter * 1.0936133;
+      echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+    ?>
+
+    <conversion>
+      <meter><?php echo $meter; ?></meter>
+      <miles><?php echo $miles;  ?></miles>
+      <yard><?php echo $yards;  ?></yard>
+    </conversion>
+   ```
+
+The passed value is fetched with `$_REQUEST['meter']` and passed to the variable `$meter`. Then the value is converted to miles and yards and stored in the variables `$miles` and `$yards`. After that the return is generated as XML encoded output as response:
+
+   ```
+    <?xml version="1.0" encoding="utf-8"?>
+    <conversion>
+      <meter>1000</meter>
+      <miles>0.62137119223733</miles>
+      <yard>1093.6133</yard>
+    </conversion>
    ```
 
 
