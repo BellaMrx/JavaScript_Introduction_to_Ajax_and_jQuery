@@ -17,6 +17,7 @@
  2. introduction to JavaScript library jQuery
     - 2.1. Include jQuery in the HTML document
     - 2.2. The basic use of jQuery
+    - 2.3. The convenient jQuery selectors
 
 
 
@@ -558,6 +559,67 @@ When jQuery is included via CDN, it can only work online. But the advantage of t
 Example:
 
   [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_5) --> **Examples/Part_5/...**
+
+index.html
+  ```
+   <head>
+     <meta charset="utf-8">
+     <title>Integrate jQuery into the web page</title>
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+     <script src="jquery-3.7.1.min.js"></script>
+   </head>
+   <body>
+     <h1>Embedding jQuery</h1>
+     <p></p>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("p").append("<b>jQuery was successfully integrated.</b>");
+   });
+  ```
+
+ <img src="Images/Ajax_part-5.png" width="500">
+
+  ```
+   $("p").append("<b>jQuery was successfully integrated.</b>");
+  ```
+
+Here the HTML element is searched for all `p` elements and with `append()` the text `jQuery was successfully integrated.` is appended.
+
+Here you can see the typical jQuery syntax for selecting HTML elements to perform an action on. Basic access in jQuery is almost always in the following form:
+
+  ```
+   $(Selector).action()
+  ```
+
+The `$` character is the variable through which JQuery is accessed by default. The `(selector)` is a query or a search for an HTML element. The `action()` specifies the action or method to be executed on that element.
+
+The typical basic framework of jQuery:
+
+  ```
+   $(document).ready(function() {
+    /* jQuery code */
+   });
+  ```
+
+Here you can see that the jQuery code is noted inside `$(document).ready(function(){...})`. Via `ready()` a callback function is registered, which is called when the document is completely loaded. This avoids changing an element on the web page that has not been loaded yet.
+
+#### Short notation
+
+  ```
+   $(function)() {
+    /* jQuery code */
+   }
+  ```
+
+
+## 2.3. The convenient jQuery selectors
+
+
 
 
 
