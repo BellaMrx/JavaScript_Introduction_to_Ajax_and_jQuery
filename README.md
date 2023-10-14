@@ -12,6 +12,7 @@
     - 1.4. Send data
     - 1.5. Get the status of the `XMLHttpRequest` object
     - 1.6. Forward the response from the server
+    - 1.7. A more complex Ajax example with XML and DOM
 
 
 
@@ -101,7 +102,7 @@ The PHP script should be located in the same directory as **index.html**.
     ?>
    ```
 
- <img src="Images/Ajax_part-1.png" width="500">
+ <img src="Images/Ajax_part-1a.png" width="500">
 
 
 ## 1.2. Create the `XMLHttpRequest` object 
@@ -213,6 +214,7 @@ List with common status codes:
 | `404` | `Not Found` 	| The requested resource was not found on the web server. |
 
 This is how the state of the `XMLHttpRequest` object is checked:
+
    ```
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -229,6 +231,34 @@ More information about the properties of the `XMLHttpRequest` object is availabl
 
 
 ## 1.6. Forward the response from the server 
+The response from the server is contained in the `responseText` or `responseXML` property of the `XMLHttpRequest` object. The data contained in it can then be further processed. The returned text is inserted into the HTML element as new text:
+
+   ```
+    document.querySelector('#refreshtime').innerHTML = xmlhttp.responseText;
+   ```
+
+If the return from the server is not XML, the `responseText` property should always be used, in which the returned data is an ordinary string. If, on the other hand, the return from the server is XML encoded and the data is to be parsed as an XML object, the `responseXML` property must be used.
+
+
+### The php script
+The php-script in this example, returns only an indication from date and time.
+
+   ```
+    <?php
+      echo date('l jS \of F Y h:i:s A');
+    ?> 
+   ```
+
+
+### The complete example on execution
+The first paragraph with the text `With Ajax the time of the server should be output.` is changed when the user presses the button. The timestamp behind the button is already set using the JavaScript function `timestamp()` when the web page is loaded with `onload` in the `body` element.
+For this process, *Ajax* has now been used with the `XMLHttpRequest` object. The button can be used as often as you like, and always the time output will be updated.
+However, the web page is not completely reloaded, but only individual information or components of the web page are updated.
+
+ <img src="images/Ajax_part-1b.png" width="400"> <img src="images/Ajax_part-1c.png" width="400">
+
+
+## 1.7. A more complex Ajax example with XML and DOM
 
 
 
