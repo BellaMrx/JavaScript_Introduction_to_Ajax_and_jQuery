@@ -1,0 +1,17 @@
+[
+    {
+      "url":"http://www.amsterdam.com/",
+      "location":"Amsterdam",
+      "zipcode":1234
+    },
+    {
+      "url":"http://www.tokyo.com/",
+      "location":"Tokyo",
+      "zipcode":2468
+    },
+    {
+      "url":"http://www.cairo.com/",
+      "location":"Cairo",
+      "zipcode":1357
+    }
+  ]

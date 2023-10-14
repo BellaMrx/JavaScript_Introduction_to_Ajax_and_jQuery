@@ -13,6 +13,7 @@
     - 1.5. Get the status of the `XMLHttpRequest` object
     - 1.6. Forward the response from the server
     - 1.7. A more complex Ajax example with XML and DOM
+    - 1.8. The JSON data format with Ajax
 
 
 
@@ -346,6 +347,188 @@ The passed value is fetched with `$_REQUEST['meter']` and passed to the variable
       <yard>1093.6133</yard>
     </conversion>
    ```
+
+This returned XML document is then evaluated with the `parseRecalculate()` callback function set up with `onreadystatechange`:
+
+   ```
+    function parseRecalculate() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+       // Response from the server
+        let xml = xmlhttp.responseXML;
+        let miles_response = xml.querySelector('miles');
+        let yards_response = xml.querySelector('yards');
+
+       // Write results
+        document.querySelector('#miles').value = miles_response.firstChild.nodeValue;
+        document.querySelector('#yards').value = yards_response.firstChild.nodeValue;
+       // In case of an error
+      } else {
+        document.querySelector('#miles').value = 0;
+        document.querySelector('#yards').value = 0;
+      }
+    }  
+   ```
+
+Here, `readyState` and `status` are first used to check whether the response from the server is ready. If it is, the response is contained in `responseXML` of the `XMLHttpRequest` object, because the response is now XML-encoded. Since XML files are used here, the response can be evaluated using the **DOM**. Here the value of the node `miles` and `yards` is to be determined:
+
+   ```
+    let miles_response = xml.querySelector('miles');
+    let yards_response = xml.querySelector('yards'); 
+   ```
+
+Here you can see that with `responseXML` the DOM method can be accessed directly. The values `miles_response` and `yard_response` read from the XML document are finally written into the form fields as follows:
+
+   ```
+    document.querySelector('#miles').value = miles_response.firstChild.nodeValue;
+    document.querySelector('#yards').value = yards_response.firstChild.nodeValue; 
+   ```
+
+ <img src="Images/Ajax_part-2b.png" width="500">
+
+
+## 1.8. The JSON data format with Ajax
+A simple alternative to XML is **JSON**(JavaScript Object Notation) for exchanging information between server and client. JSON is probably now more widely used than XML.
+With JSON, objects and arrays can be specified as an ordinary string, this process is called **serialization**.
+
+An array can be specified between square brackets:
+
+   ```
+    ["text1", "text2", "text3", "text4"]
+   ```
+
+Objects are noted in curly brackets:
+
+   ```
+    {"Property1": "Value", "Property2" : "Value" }
+   ```
+
+The JSON data format can be read by any programming language.
+
+Here is an example with an `dictionary` object:
+
+   ```
+    {"dictionary": [
+      {"location": "Amsterdam", "zipcode":1234},
+      {"location": "Tokyo", "zipcode":2468},
+      {"location": "Cairo", "zipcode":1357}
+    ] }
+   ```
+
+The property names (`location`, `zipcode`) must be enclosed in double quotes when notating JSON. Besides arrays and objects, numbers, strings(with "..."), boolean values (`true`, `false`) and `null` can be used as data types.
+
+Since JSON uses the JavaScript syntax, it is quite easy to create such an array of objects in JS: 
+
+   ```
+    let dictionary = [
+      {"location": "Amsterdam", "zipcode": 1234},
+      {"location": "Tokyo", "zipcode": 2468},
+      {"location": "Cairo", "zipcode": 1357}
+    ];
+   ```
+
+And so it is then possible to access the individual entries with the help of JavaScript:
+
+   ```
+    let dictionary = [
+      {"location": "Amsterdam", "zipcode": 1234},
+      {"location": "Tokyo", "zipcode": 2468},
+      {"location": "Cairo", "zipcode": 1357}
+    ];
+
+    document.querySelector('#output').innerHTML = "<ul>" +
+    "<li>" + dictionary[0].location + " = " + dictionary[0].zipcode + "</li>" +
+    "<li>" + dictionary[1].location + " = " + dictionary[1].zipcode + "</li>" +
+    "<li>" + dictionary[2].location + " = " + dictionary[2].zipcode + "</li></ul>";
+   ```
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_3) --> **Examples/Part_3/...**
+
+ <img src="Images/Ajax_part-3.png" width="500">
+
+The data can also be modified:
+
+   ```
+    dictionary[0].location = "Madrid"    // Amsterdam turns into Madrid
+   ```
+
+Usually a `for` loop is used for traversing each element in the JSON.data format:
+
+   ```
+    ...
+    let txt = "<ul>";
+    for (let i = 0; i <ul dictionary.lengh; i++) {
+      txt += "<li>" + dictionary[i].location + " = " + dictionary[i].zipcode + "</li>";
+    }
+    txt += "</ul>";
+    document.querySelector('#output').innerHTML = txt;
+    ...
+   ```
+
+In practice, JSON data formats are often used to read data from a web server in order to display it on the web page.
+
+To convert a JSON text into a JavaScript object, there is a method called `JSON.parse()`:
+
+   ```
+    let obj = JSON.parse(text);
+   ```
+
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_4) --> **Examples/Part_4/...**
+
+index.html
+   ```
+    <h1>JSON example</h1>
+    <p id="output"></p>
+    <script src="script.js"></script>
+   ```
+
+script.js
+   ```
+    let xmlhttp = new XMLHttpRequest();
+    let url = "data.json";
+
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var myArr = JSON.parse(xmlhttp.responseText);
+        myParse(myArr);
+      }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function myParse(arr) {
+      let out = '<ul>';
+      for (let i = 0; i < arr.length; i++) {
+        out += '<li>' + '<a href="' + arr[i].url + '">' +
+            arr[i].location + '</a>' + " = " + arr[i].zipcode + '</li>';
+      }
+      out += '</ul>';
+      document.querySelector('#output').innerHTML = out;
+    }
+   ```
+
+Here a connection to the server is made and an HTTP request for the **data.json** file. If the request was successful, the string is parsed into JSON and creates an object:
+
+   ```
+    let myArr = JSON.parse(xmlhttp.responseText);
+   ```
+
+This data is passed to the function `myOutput()` where the content for the web page is compiled and displayed in HTML.
+
+ <img src="Images/Ajax_part-4.png" width="500">
+
+#### Fetch API
+In practice, it is not necessary to go the complex route via the `XMLHttpRequest` object. For Ajax requests, for example, the Fetch API is a good choice. This is much easier to use.
+
+
+
+# 2. 
+
+
+
+
+
 
 
 
