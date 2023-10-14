@@ -14,6 +14,9 @@
     - 1.6. Forward the response from the server
     - 1.7. A more complex Ajax example with XML and DOM
     - 1.8. The JSON data format with Ajax
+ 2. introduction to JavaScript library jQuery
+    - 2.1. Include jQuery in the HTML document
+    - 2.2. The basic use of jQuery
 
 
 
@@ -523,12 +526,38 @@ In practice, it is not necessary to go the complex route via the `XMLHttpRequest
 
 
 
-# 2. 
+# 2. Introduction to JavaScript library jQuery
+It can be quite time-consuming to use only pure JavaScript. For recurring functions you can write and use your own small functions. Or you can simply use a JavaScript library.
+One of the most popular JavaScript libraries is **jQuery**, which makes it much easier to use JavaScript for web pages. HTML/DOM manipulations, CSS manipulations, methods for events, effects and animations and also Ajax are only some topics that can be used much easier with jQuery.
 
 
+## 2.1. Include jQuery in the HTML document
+To use the jQuery library, it must be included. The jQuery library can be downloaded from [jQuery](https://jquery.com/download/) and included locally or jQuery can be included directly online from a **CDN** like Google or Microsoft.
+
+When downloading JQuery to host it yourself, there is usually a *Production Version* and a *Development Version*. For a serious web project the *Production Version* is used, because this version is compressed and minimized, for testing the *Development Version* should be used. The downloaded file can be included into the HTML document with the `<script>` tag.
+
+   ```
+    <head>
+      <script src="script.js"></script>
+    </head>
+   ```
+
+If jQuery is to be included via CDN then:
+
+   ```
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+   ```
+
+When jQuery is included via CDN, it can only work online. But the advantage of this is a faster loading time.
 
 
+## 2.2. The basic use of jQuery
 
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_5) --> **Examples/Part_5/...**
 
 
 
