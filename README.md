@@ -21,6 +21,8 @@
     - 2.4. jQuery events
     - 2.5. Query and set content and HTML attributes with jQuery
     - 2.6. Add and delete HTML elements with jQuery
+    - 2.7. Manipulate CSS with jQuery
+    - 2.8. jQuery effects and animations
 
 
 ---------------------------------------------------------
@@ -887,11 +889,229 @@ Also, jQuery provides methods for adding and removing content for the HTML eleme
 | `remove()`  | Removes the selected element and any child elements it may contain. |
 | `empty()`   | Removes the child elements of the selected element. |
 
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_11) --> **Examples/Part_11/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+     <h1>Add elements</h1>
+     <div class="frame">
+        <p>A paragraph text</p>
+     </div>
+     <div>
+        <br>
+        <button id="btn01">Add at the end</button>
+        <button id="btn02">Add at the beginning</button><br>
+        <button id="btn03">Add behind the end</button>
+        <button id="btn04">Add before the beginning</button>
+     </div>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        $(".frame").append("<p>Paragraph with append()</p>");
+     });
+     $("#btn02").click(function() {
+        $(".frame").prepend("<p>Paragraph with prepend()</p>");
+     });
+     $("#btn03").click(function() {
+        $(".frame").after("<p>Paragraph with after()</p>");
+     });
+     $("#btn04").click(function() {
+        $(".frame").before("<p>Paragraph with before()</p>");
+     });
+
+   }); 
+  ```
+
+ <img src="Images/Ajax_part-11.png" width="500">
+
+The methods for deleting elements with `remove()` and `empty()` work similarly:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_12) --> **Examples/Part_12/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <h1>Remove elements</h1>
+     <div class="frame">
+        <p>A paragraph text</p>
+        <p>A second paragraph text</p>
+        <p>A third paragraph text</p>
+     </div>
+     <br>
+     <button id="btn01">empty()-Method</button>
+     <button id="btn02">remove()-Method</button>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        $(".frame").empty();
+     });
+     $("#btn02").click(function() {
+        $(".frame").remove();
+     });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-12.png" width="500">
 
 
+## 2.7. Manipulate CSS with jQuery
+
+| Method          | Description  |
+| --------------- | ------------ |
+| `addClass()`    | Adds a class to the selected element |
+| `removeClass()` | Removes a class from the selected element |
+| `toggleClass()` | can add and remove a class from a selected element |
+| `css()`         | Sets or determines style attributes for a selected element |
+
+An example with `addClass()` and `removeClass()`:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_13) --> **Examples/Part_13/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <h1>Add and remove CSS</h1>
+    <div class="note">
+        <p>A paragraph text.</p>
+        <p>A second paragraph text.</p>
+        <p>A third paragraph text.</p>
+    </div>
+    <br>
+    <button id="btn01">Add style</button>
+    <button id="btn02">Remove style</button>
+    <script src="script.js"></script>
+  ```
+
+style.css
+  ```
+   .frame {
+     background: lightcyan;
+     height: 250px;
+     overflow: auto;
+     width: 500px;
+     border: 1px solid navy;
+     padding: 1em;
+     border-radius: 20px;
+   }
+   ...
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        $(".note").addClass("frame");
+     });
+     $("#btn02").click(function() {
+        $(".note").removeClass("frame");
+     });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-13.png" width="500">
+
+Here the stylesheet can be added (`addClass()`) or removed (`removeClass()`) at any time by a click.
+
+Adding and removing elements is easier with the `toggleClass()` method:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_13) --> **Examples/Part_13/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <h1>Add and remove CSS</h1>
+    <div class="note">
+        <p>A paragraph text.</p>
+        <p>A second paragraph text.</p>
+        <p>A third paragraph text.</p>
+    </div>
+    <br>
+    <button id="btn01">Toggle Style</button>
+    <script src="script.js"></script>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        $(".note").toggleClass("frame");
+     });
+
+   });  
+  ```
+
+ <img src="Images/Ajax_part-14.png" width="500">
 
 
+The `css()` method gives access to individual CSS attributes:
 
+  ```
+   $("div").css("background-color", "green");  
+  ```
+
+Multiple CSS properties can also be used at once:
+
+  ```
+   $("div.note").css({
+    "background-color", "red",
+    "color": "white"
+   });
+  ```
+
+If only one value of an element is to be determined, one must note only the name of the property with `css("property_name")`:
+
+  ```
+   let color = $("p.note").css("background-color");  
+  ```
+
+
+## 2.8. jQuery effects and animations
+Creating animations with timers and intervals is quite complex in JavaScript. With jQuery it is simplified a bit.
+
+#### An overview of the common jQuery methods Effects
+
+| Method          | Description                                                             |
+| --------------- | ----------------------------------------------------------------------- |
+| `hide()`        | This hides a selected element.                                          |
+| `show()`        | Displays a selected element again.                                      |
+| `toggle()`      | Toggles between `hide()` and `show()` methods.                          |
+| `fadeIn()`      | Slowly fades in a hidden element.                                       |
+| `fadeOut()`     | Slowly fade out a visible element.                                      |
+| `fadeToggle()`  | Toggles between the `fadeIn()` and `fadeOut()` methods.                 |
+| `fadeTo()`      | Allows an element to be faded or transparent, the strength can be specified from `0.0` to `1.0`. |
+| `slideDown()`   | Slides a selected element down.                                         |
+| `slideUp()`     | Slide a selected element up.                                            |
+| `slideToggle()` | Toggles between the `slideDown()` and `slideUp()` methods               |
+| `animate()`     | Use this method to create a custom animation with CSS properties.       |
+| `stop()`        | This will stop an animation or effect before the animation or effect is finished. |
 
 
 
