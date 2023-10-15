@@ -18,6 +18,7 @@
     - 2.1. Include jQuery in the HTML document
     - 2.2. The basic use of jQuery
     - 2.3. The convenient jQuery selectors
+    - 2.4. jQuery events
 
 
 
@@ -618,6 +619,65 @@ Here you can see that the jQuery code is noted inside `$(document).ready(functio
 
 
 ## 2.3. The convenient jQuery selectors
+The jQuery selectors are the most important part of the jQuery library because they are used to select and manipulate HTML elements. The elements can be selected based on the type, class, ID, attribute name, attribute value, etc. `$()` is a function call that is passed the selector as a parameter, i.e. `$(selector)`. The `$` character is shorthand for **jQuery()**.
+
+The jQuery selector to search for ID attributes of an HTML tag is noted with the `#` character followed by the corresponding ID. So `$("#myid")` will search for an HTML element with the `id="myid"`. However, if an HTML element with a specific class is searched for, a dot `.` must be used instead of `#`, i.e. `$()".myclass"`. This will search for all HTML elements where `class="myclass"` has been noted. The principle is the same as for `document.querySelector()` and `document.querySelectorAll()`. 
+
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_6) --> **Examples/Part_6/...**
+
+index.html
+  ```
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   </head>
+   <body>
+     <h1>Use selectors</h1>
+     <p id="p01">Paragraph 1</p>
+     <p class="class01">Paragraph 2</p>
+     <p>Paragraph 3</p>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("p").append(" - <b>Element selector</b>");
+     $("#p01").append(" - <b>ID selector</b>");
+     $(".class01").append(" - <b>Class selector</b>");
+   }); 
+  ```
+
+ <img src="Images/Ajax_part-6.png" width="500">
+
+The first selector with `$("p")` appends the text `element selector` to the end of all `p` elements. With `$("#p01")` on the other hand, the text `ID selector` is appended to the HTML element only, with `id="p01"`. The last selector with `$(".class01")`, on the other hand, searches all HTML elements with `class="class01"` and appends the text `class selector` at the end.
+
+The jQuery selectors can also be combined. For example, to select all `p` elements with `class="warning"`, the jQuery selector is written `$("p.warning")`. But because of the newer DOM methods `querySelector()` and `querySelectorAll()`, there is no need to use jQuery so much.
+
+| jQuery selector           | Description  |
+| ------------------------- | ------------ |
+| `$("*")`                  | Select all elements |
+| `$("div, p")`             | all `div` and `p` elements |
+| `$("div.note")`           | all `p` elements with `class="note"` |
+| `$("p:first")`            | the first `p` element |
+| `$("p:last")`             | the last `p` element |
+| `$("ul li:first")`        | the first `li` element in the first `<ul>` |
+| `$("[src]")`              | all elements with the `src` attribute |
+| `$("a[target='_blank']")` | all `a` elements where the value of the `target` attribute is equal to `_blank` |
+| `$(":button")`            | all `button` elements and all `input` elements with `type="button"` |
+| `$("div#alist ul")`       | all `ul` elements that are inside a `div` element with the `id="alist"` |
+| `$("input[type=text]")`   | all `input` elements with `type="text"` |
+| `$("tr:even")`            | all even `tr` elements |
+| `$("tr:odd")`             | all odd `tr` elements |
+| `$(":empty")`             | all elements that are empty |
+
+
+
+## 2.4. jQuery events
+
+
+
 
 
 
