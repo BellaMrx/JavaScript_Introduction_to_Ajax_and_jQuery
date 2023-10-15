@@ -870,12 +870,23 @@ script.js
    });
   ```
 
- <img src="Images/Ajax_part-10.png" width="900">
+ <img src="Images/Ajax_part-10.PNG" width="900">
 
 Here simply a link, with `href` attribute is replaced by a new link.
 
 
 ## 2.6. Add and delete HTML elements with jQuery
+Also, jQuery provides methods for adding and removing content for the HTML elements:
+
+| Method      | Description  |
+| ----------- | ------------ |
+| `append()`  | Adds a content to the end of the selected element. |
+| `prepend()` | Adds a content to the beginning of the selected element. |
+| `after()`   | Adds a content after the selected element. |
+| `before()`  | Adds a content before the selected element. |
+| `remove()`  | Removes the selected element and any child elements it may contain. |
+| `empty()`   | Removes the child elements of the selected element. |
+
 
 
 
