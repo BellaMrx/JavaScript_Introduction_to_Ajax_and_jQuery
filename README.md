@@ -19,7 +19,8 @@
     - 2.2. The basic use of jQuery
     - 2.3. The convenient jQuery selectors
     - 2.4. jQuery events
-
+    - 2.5. Query and set content and HTML attributes with jQuery
+    - 2.6. Add and delete HTML elements with jQuery
 
 
 ---------------------------------------------------------
@@ -675,6 +676,213 @@ The jQuery selectors can also be combined. For example, to select all `p` elemen
 
 
 ## 2.4. jQuery events
+For almost every DOM event there is a matching jQuery method. For example, to assign the `click` event to all `div` elements of a web page, the following must be noted:
+
+  ```
+   $("div").click(function () {
+     // Respond to the click.event
+   }); 
+  ```
+
+The anonymous function is used to specify what should happen when a `click` event is fired on the `div` element.
+
+Here is an example of jQuery responding to `onclick`, `onmouseenter` and `onmouseleave`:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_7) --> **Examples/Part_7/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <h1>jQuery events</h1>
+     <button id="btn01">Click here</button>
+     <p id="p01"></p>
+     <script src="script.js"></script>
+  </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+      $("#btn01").click(function() {
+        $("#p01").text("Button was clicked");
+      });
+      $("#btn01").mouseenter(function() {
+        $("#p01").text("Mouse over the button");
+      });
+      $("#btn01").mouseleave(function() {
+        $("#p01").text("Mouse has left the button");
+      });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-7.png" width="500">
+
+Here, the jQuery events `click()`, `mouseenter()`, and `mouseleave()` are handled in conjunction with the `id="btn01"` element. The event is displayed in the paragraph text below. The text content of the selected paragraph text is changed with the jQuery `text()` method.
+
+| jQuery event method | Description |
+| ------------------- | ------------ |
+| `click()`           | Mouse click on an HTML element |
+| `dblclick()`        | Double-click on an HTML element |
+| `mouseenter()`      | Mouse cursor has entered the area of the HTML element. |
+| `mouseleave()`      | Mouse pointer has left the HTML element |
+| `keypress()`        | Button above the HTML element was pressed |
+| `keydown()`         | Button above the HTML element is currently depressed |
+| `keyup()`           | Button above the HTML element was released |
+| `submit()`          | The `submit` event was triggered, i.e. the sender button was pressed |
+| `focus()`           | An input field receives the focus |
+| `blur()`            | An input field has just lost the focus |
+| `change()`          | An input field has lost focus and was changed during the time in focus  |
+
+#### `hover()`
+A bit more special is `hover()`, because this method can take two functions as a combination. 
+
+  ```
+   ...
+   $("#btn01").hover( function() {
+      $("#p01").text("Mouse over the button"); 
+   },
+   function() {
+      $("#p01").text("Mouse has left the button"); 
+   } );
+   ...
+  ```
+
+
+## 2.5. Query and set content and HTML attributes with jQuery
+Getting or setting content and attributes is implemented in jQuery using four jQuery methods.
+
+| Method   | Description  |
+| -------- | ------------ |
+| `text()` | Sets or returns the text content of the selected element |
+| `html()` | Sets or returns the text content of the selected element, including the HTML markup |
+| `val()`  | Sets the content of an input field or returns the value it contains |
+| `attr()` | Sets/changes the content of an attribute value or determines the value of the attribute |
+
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_8) --> **Examples/Part_8/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <h1>Read content with jQuery</h1>
+     <button id="btn01">Readout</button>
+     <p id="p01">I <b>am a</b> Text</p>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+      $("#btn01").click(function() {
+        let txt = $("#p01").text();
+        let htm = $("#p01").html();
+        console.log(txt + '\n' + htm);
+        //alert(txt + '\n' + htm);
+      });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-8.png" width="900">
+
+When the button is pressed , the content of the HTML element with `id="p01"` is read once with `text()` and once with `html()` and output in a web console.
+
+It is also possible to set the content with a value:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_9) --> **Examples/Part_9/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <h1>Set content with jQuery</h1>
+     <input type="text" id="inp01" placeholder="Input here">
+     <button id="btn01">Readout</button>
+     <p id="txt">text()-Version</p>
+     <p id="htm">html()-Version</p>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        let inp = "Your input: <b>";
+        inp += $("#inp01").val() + "</b>";
+        $("#txt").text(inp);
+        $("#htm").html(inp);
+        $("#inp01").val("Thanks");
+     });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-9.png" width="500">
+
+When something is entered into the input field and the button is pressed, `val()` reads the content of the input field and assembles it into a string in the variable `inp`.
+
+It is also possible to determine and change HTML attributes:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_10) --> **Examples/Part_10/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <h1>Set content with jQuery</h1>
+     <input type="text" id="inp01" placeholder="Input here">
+     <button id="btn01">Readout</button>
+     <p id="txt">text()-Version</p>
+     <p id="htm">html()-Version</p>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+
+     $("#btn01").click(function() {
+        let backup = "Old link: " + $("a").attr("href");
+        $("a").attr("href", $("#inp01").val());
+        backup += "\nNew link: " + $("a").attr("href");
+        // alert(backup);
+        console.log(backup);
+     });
+
+   });
+  ```
+
+ <img src="Images/Ajax_part-10.png" width="900">
+
+Here simply a link, with `href` attribute is replaced by a new link.
+
+
+## 2.6. Add and delete HTML elements with jQuery
+
+
+
+
+
+
+
 
 
 
