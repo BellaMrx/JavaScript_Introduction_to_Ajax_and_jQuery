@@ -1,0 +1,23 @@
+label {
+    min-width: 5em;
+    display: inline-block;
+    text-align: left;
+}
+
+#miles,
+#yards {
+    color: grey;
+}
+
+fieldset {
+    width: 25em;
+    padding: 2em;
+    background: lightgoldenrodyellow;
+    border: 1px solid green;
+}
+
+legend {
+    background: white;
+    padding: 0.2em;
+    border: 1px solid green;
+}

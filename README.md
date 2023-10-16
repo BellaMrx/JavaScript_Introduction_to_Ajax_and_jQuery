@@ -23,6 +23,7 @@
     - 2.6. Add and delete HTML elements with jQuery
     - 2.7. Manipulate CSS with jQuery
     - 2.8. jQuery effects and animations
+    - 2.9. Use jQuery and Ajax together
 
 
 ---------------------------------------------------------
@@ -1357,15 +1358,111 @@ script.js
  <img src="Images/Ajax_part-21.png" width="500">
 
 
+## 2.9. Use jQuery and Ajax together
+Related to the first Ajax example (Part_1), where a PHP script was used to fetch and output the server's time, the alternative solution with jQuery is much shorter and simpler:
+
+This example does not work offline testing, but a web server is needed!
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_22) --> **Examples/Part_22/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <p id="dynamic01">With Ajax the time of the server is to be issued</p>
+    <button id="time">Renew time</button>
+    <script src="script.js"></script>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#time").click(function() {
+        $("#dynamic01").load("server-time.php");
+     });
+   });
+  ```
+
+Here, with the jQuery method `load()`, the `XMLHttpRequest` object is created, a request is made to the server and the response from the server is put into the selected element.
+
+It is possible to check the state of the `XMLHttpRequest` object with this, only one more callback function is needed for this:
+
+  ```
+   $(document).ready(function() {
+     $("#time").click(function() {
+        $("#dynamic01").load("server-time.php", 
+        // callback-function
+        function(responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                // alert("External file loaded successfully")
+                alert(responseTxt);
+            }
+            if (statusTxt == "error") {
+                alert("Fehler:" + xhr.status + ":" + xhr.statusText);
+            }
+        });
+     });
+   });
+  ```
+
+The status is in `statusTxt` with `success` or `error`. The `XMLHttpRequest` object is in `xhr` and the complete response from the server is in `responseTxt`.
 
 
+Also for `GET` and `POST` jQuery provides two methods with `$.get()` and `$.post()`. The example refers to Part_2 with Ajax. With jQuery, the example looks like this:
 
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_23) --> **Examples/Part_23/...**
 
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <h1>Convert units</h1>
+    <form>
+        <fieldset>
+            <legend>Convert meters to miles and yards</legend>
+            <label>Meters:</label>
+            <input type="number" id="meter" placeholder="Value in meters"> m
+            <br><label>Miles:</label>
+            <input type="number" id="miles" placeholder="Miles conversion" readonly> mi
+            <br><label>Yards:</label>
+            <input type="number" id="yards" placeholder="Conversion yards" readonly> yds
+        </fieldset>
+    </form>
+    <script src="script.js"></script>
+  ```
 
+script.js
+  ```
+   $(document).ready(function() {
+     $("#meter").keyup(function() {
+        $.get("calc.php?meter=" + $("#meter").val(), function(data, status) {
+            if (status == "success") {
+                var miles_response = data.querySelector("miles");
+                var yards_response = data.querySelector("yards");
+                $("#miles").val(miles_response.firstChild.nodeValue);
+                $("#yards").val(yards_response.firstChild.nodeValue);
+            } else {
+                $("#miles").val(0);
+                $("#yards").val(0);
+            }
+        });
+     });
+   });
+  ```
 
+Here `$.get()` was passed as the first parameter of the URL and the second parameter is the callback function, which here evaluates the status of the request and the data and processes it accordingly. The first parameter of the callback function contains the data that the request returned and the second parameter is equal to the status of the request. The syntax of `$.get()` is:
 
+  ```
+   $.get(url, myCallbackFunction);
+  ```
 
+For `POST` requests the `$.post()` method can be used. With the `POST` method there is an additional parameter in which data can optionally be sent along with the request. The syntax of `$.POST()` is: 
 
+  ```
+   $.postt(url, data,  myCallbackFunction);
+  ```
 
 
 
