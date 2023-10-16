@@ -1039,7 +1039,7 @@ Here the stylesheet can be added (`addClass()`) or removed (`removeClass()`) at 
 
 Adding and removing elements is easier with the `toggleClass()` method:
 
-  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_13) --> **Examples/Part_13/...**
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_14) --> **Examples/Part_14/...**
 
 index.html
   ```
@@ -1112,6 +1112,114 @@ Creating animations with timers and intervals is quite complex in JavaScript. Wi
 | `slideToggle()` | Toggles between the `slideDown()` and `slideUp()` methods               |
 | `animate()`     | Use this method to create a custom animation with CSS properties.       |
 | `stop()`        | This will stop an animation or effect before the animation or effect is finished. |
+
+Here is a simple example using `hide()`, `show()` and `toggle()` to hide and redisplay selected elements:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_15) --> **Examples/Part_15/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <h1>Effects with jQuery</h1>
+    <div class="frame">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+            Aenean commodo ligula eget dolor. Aenean massa. 
+            Cum sociis natoque penatibus et magnis dis parturient montes, 
+            nascetur ridiculus mus. </p>
+    </div>
+    <br>
+    <button id="btn01">Hide</button>
+    <button id="btn02">Show</button>
+    <button id="btn03">Toggle</button>
+    <script src="script.js"></script>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("div").hide(1000, function() {
+            alert("The element is now hidden")
+        });
+     });
+     $("#btn02").click(function() {
+        $("div").show(1000);
+     });
+     $("#btn03").click(function() {
+        $("div").toggle(1000);
+     });
+   }); 
+  ```
+
+ <img src="Images/Ajax_part-15.png" width="500">
+
+In the methods, the value `1000` was also used to specify a time in milliseconds how fast the element should be faded in or out. In addition to a number specification in milliseconds, the values `slow` or `fast` can also be used.
+
+A callback function has also been set up here to display an `alert` hint box when `hide()` has finished executing:
+
+  ```
+   $("#btn01").click(function() {
+     $("div").hide(1000, function() {
+         alert("The element is now hidden")
+     });
+   });
+  ```
+
+The method to slowly fade in and out also works with `fadeIn()`, `fadeOut()` or `fadeToggle()`:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_16) --> **Examples/Part_16/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+   <body>
+     <div class="frame-cloud">
+        <img src="clouds.png" width="250" id="cloud" alt="cloud">
+     </div>
+     <br>
+     <button id="btn01">Fade Out</button>
+     <button id="btn02">Fade In</button>
+     <button id="btn03">Fade Toggle</button>
+     <script src="script.js"></script>
+   </body>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("#cloud").fadeOut(4000, function() {
+            alert("The element was hidden")
+        });
+     });
+     $("#btn02").click(function() {
+        $("#cloud").fadeIn(4000);
+     });
+     $("#btn03").click(function() {
+        $("#cloud").fadeToggle("slow");
+     });
+   });
+  ```
+
+ <img src="Images/Ajax_part-16.png" width="500">
+
+
+#### jQuery methods concatenate
+jQuery methods can be concatenated together:
+
+  ```
+   $("#cloud").fadeOut(2000).fadeIn(4000);
+  ```
+
+
+
+
+
+
 
 
 
