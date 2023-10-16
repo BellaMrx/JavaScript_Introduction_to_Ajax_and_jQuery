@@ -1208,12 +1208,156 @@ script.js
  <img src="Images/Ajax_part-16.png" width="500">
 
 
-#### jQuery methods concatenate
 jQuery methods can be concatenated together:
 
   ```
    $("#cloud").fadeOut(2000).fadeIn(4000);
   ```
+
+With the `slideToggle()` method, you can slide the elements up and down, basically similar to showing and hiding them:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_17) --> **Examples/Part_17/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <div id="teaser"><strong>Click here</strong></div>
+    <div id="cloud">
+        <p><img src="clouds.PNG" alt="Clouds" width="100" style="float:left;">Lorem ipsum dolor sit amet, 
+            consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+            mus. </p>
+    </div>
+    <script src="script.js"></script>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#teaser").click(function() {
+        $("#cloud").slideToggle(4000, function() {
+            alert("The action is ready")
+        });
+     });
+   });
+  ```
+
+ <img src="Images/Ajax_part-17.png" width="500">
+
+
+Using the jQuery method `animate()`, it is possible to animate elements with CSS properties. The position of the element can be moved, enlarged or reduced:
+
+  ```
+   $(selector).animate({parameter}, speed, callback)
+  ```
+
+The CSS property to be animated is defined as a parameter. The speed is also here a value in milliseconds or `slow` and `fast`. A callback function can be used optionally.
+
+By default all elements have a static position and cannot be moved easily. Therefore the CSS property `position` must be set to `relative`, `fixed` or `absolute`.
+
+Example:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_18) --> **Examples/Part_18/...**
+
+index.html
+  ```
+   ...
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   ...
+    <div id="frame">
+        <p><img src="ball.png" id="ball" alt="Ball"></p>
+    </div>
+    <br>
+    <button id="btn01">Animate ball</button>
+    <script src="script.js"></script>
+  ```
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("#ball").animate({ left: "300px" }, 2000);
+     });
+   });
+  ```
+
+ <img src="Images/Ajax_part-18.png" width="500">
+
+
+If multiple CSS properties are specified, all properties are animated simultaneously:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_19) --> **Examples/Part_19/...**
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("#ball").animate({
+            left: "320px",
+            width: "50px",
+            opacity: "0.0"
+        }, 2000);
+     });
+   });
+  ```
+
+Here the ball is moved from left to right by 320px and reduced to the size of 50px (`width`) until the ball is invisible at the end (`opacity: 0.0`).
+
+These animations can also be played individually:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_20) --> **Examples/Part_20/...**
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("#ball").animate({
+            left: "300px"
+        }, 1000);
+        $("#ball").animate({
+            width: "1px"
+        }, 2000);
+        $("#ball").animate({
+            opacity: "0.0"
+        }, 1000);
+        $("#ball").animate({
+            left: "0px",
+            width: "100px",
+            opacity: "1.0"
+        }, 2000);
+     });
+   });
+  ```
+
+If an animation is to be stopped before it has finished running, the `stop()` method can be used:
+
+  [Complete Code](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax/tree/main/Examples/Part_21) --> **Examples/Part_21/...**
+
+script.js
+  ```
+   $(document).ready(function() {
+     $("#btn01").click(function() {
+        $("#text").animate({ left: "300px" }, 1000);
+        $("#text").animate({ fontSize: "0.5em" }, 2000);
+        $("#text").animate({ opacity: "0.0" }, 1000);
+        $("#text").animate({
+            left: "0px",
+            fontSize: "1em",
+            opacity: "1.0"
+        }, 2000);
+     });
+     $("#btn02").click(function() {
+        $("#text").stop();
+     });
+   });
+  ```
+
+ <img src="Images/Ajax_part-21.png" width="500">
+
+
+
 
 
 

@@ -1,0 +1,11 @@
+#frame {
+    background: lightcyan;
+    width: 400px;
+    height: 120px;
+    border: 1px solid lightskyblue;
+    padding: 10px;
+}
+
+#text {
+    position: relative;
+}

@@ -1,0 +1,10 @@
+div {
+    background: lightskyblue;
+    width: 400px;
+    border: 1px solid #000;
+    padding: 1em;
+}
+
+#cloud {
+    position: relative;
+}

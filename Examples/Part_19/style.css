@@ -1,0 +1,11 @@
+#frame {
+    background: green;
+    width: 400px;
+    height: 120px;
+    border: 1px solid #000;
+    padding: 10px;
+}
+
+#ball {
+    position: relative;
+}
