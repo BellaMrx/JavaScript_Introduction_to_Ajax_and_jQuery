@@ -1,6 +1,6 @@
 # JavaScript_Introduction_to_Ajax
 
- JavaScript: An Introduction to Ajax Programming
+ JavaScript: An introduction to Ajax and jQuery programming
 
 ----------------------------------------------------
 
