@@ -1,4 +1,4 @@
-# JavaScript_Introduction_to_Ajax
+# JavaScript_Introduction_to_Ajax_and_jQuery
 
  JavaScript: An introduction to Ajax and jQuery programming
 
@@ -14,7 +14,7 @@
     - 1.6. Forward the response from the server
     - 1.7. A more complex Ajax example with XML and DOM
     - 1.8. The JSON data format with Ajax
- 2. introduction to JavaScript library jQuery
+ 2. Introduction to JavaScript library jQuery
     - 2.1. Include jQuery in the HTML document
     - 2.2. The basic use of jQuery
     - 2.3. The convenient jQuery selectors
@@ -1487,7 +1487,7 @@ If you don't know HTML, CSS or JavaScript yet, have a look here:
   2. [Arrays, functions, objects in JS](https://github.com/BellaMrx/Arrays_functions_objects_in_JS) - Introduction: Arrays, functions and objects in JavaScript
   3. [DOM - Document Object Model](https://github.com/BellaMrx/DOM_Document-Object-Model) -  Introduction to the **DOM** and the **DOM** manipulation - Change web pages dynamically  
   4. [Introduction to Web APIs](https://github.com/BellaMrx/JavaScript_Introduction-To-Web-APIs)
-  5. You are here --> [Introduction to Ajax and jQuery]()
+  5. You are here --> [Introduction to Ajax and jQuery](https://github.com/BellaMrx/JavaScript_Introduction_to_Ajax_and_jQuery)
 
 Or just visit my GitHub profile, you can find all guides/tutorials there [BellaMrx](https://github.com/BellaMrx)
 
