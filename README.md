@@ -24,6 +24,7 @@
     - 2.7. Manipulate CSS with jQuery
     - 2.8. jQuery effects and animations
     - 2.9. Use jQuery and Ajax together
+    - 2.10. More jQuery plug-ins
 
 
 ---------------------------------------------------------
@@ -1465,6 +1466,34 @@ For `POST` requests the `$.post()` method can be used. With the `POST` method th
   ```
 
 
+## 2.10. More jQuery plug-ins
+On the internet you can find many jQuery plug-ins that help to give a website the final touch and more usability. jQuery makes life easier if you are looking for effects, help for image galleries, tables, forms, featured sliders, zoom effects, tooltips, navigation menus, loading states and so on. Since it's also helpful for mobile devices, you should check out some of the many jQuery plug-ins. A good source for this is [jQuery Plug-ins](http://plugins.jquery.com).
+
+
+
+# The end
+This is just an introduction to **Ajax** and **jQuery**, there is much more to know about them. But these are already one of the most important topics everyone should know.
+
+If you don't know HTML, CSS or JavaScript yet, have a look here:
+  - [WebDevelopment Basics](https://github.com/BellaMrx/WebDevelopment_Basics) - Basics Guide for web developers
+  - [HTML Guide](https://github.com/BellaMrx/HTML_Guide) - Detailed guide about HTML5 (all basics for HTML)
+  - [HTML Cheat Sheets](https://github.com/BellaMrx/HTML_Cheat_Sheets) - All HTML5 elements and their attributes
+  - [CSS Guide](https://github.com/BellaMrx/CSS_Guide) - Detailed guide about CSS (Introduction to CSS, CSS Selectors, Inheritance and the cascade, CSS Box Model, CSS Positioning, Flexbox, Responsive Web Design, CSS Grid Layout, Styling with CSS, Testing and Organizing) 
+  - [Sass and SCSS Basic Guide](https://github.com/BellaMrx/Sass_and_SCSS) - An introduction to the CSS preprocessor Sass
+
+  **JavaScript Basics:**
+
+  1. [JS Introduction](https://github.com/BellaMrx/JS_introduction) - An introduction to JavaScript
+  2. [Arrays, functions, objects in JS](https://github.com/BellaMrx/Arrays_functions_objects_in_JS) - Introduction: Arrays, functions and objects in JavaScript
+  3. [DOM - Document Object Model](https://github.com/BellaMrx/DOM_Document-Object-Model) -  Introduction to the **DOM** and the **DOM** manipulation - Change web pages dynamically  
+  4. [Introduction to Web APIs](https://github.com/BellaMrx/JavaScript_Introduction-To-Web-APIs)
+  5. You are here --> [Introduction to Ajax and jQuery]()
+
+Or just visit my GitHub profile, you can find all guides/tutorials there [BellaMrx](https://github.com/BellaMrx)
+
+Thanks for the attention.
+
+#### This is the end, beautiful friend... ;)
 
 
 
